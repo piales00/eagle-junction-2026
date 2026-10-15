@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eagle → Espoo</title>
+<meta name="description" content="Equipo Eagle (UTP, Lima) rumbo a Junction 2026 en Espoo, Finlandia: el hackathon más grande de Europa.">
+<meta name="theme-color" content="#b50d30">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eagle → Espoo · Junction 2026">
+<meta property="og:description" content="Cuatro estudiantes de la UTP rumbo al hackathon más grande de Europa.">
+<meta property="og:image" content="docs/preview-desktop.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Onest:wght@400;500;700&display=swap">
+<style>
+/* Street poster in UTP crimson: flat fields edge to edge, wide heavy type, a Raphael fragment stuck on and scanned by detection boxes */
+:root{
+  --crimson:#b50d30;     /* UTP red: hero ground, one chapter */
+  --ink:#121010;         /* charcoal: second ground, dark ink */
+  --paper:#e9e7e2;       /* fresco plaster: light ground, pale ink */
+  --black:#000;          /* dark ink on crimson (3.1:1 at display size) */
+  --bone-2:#d8d2c6;      /* second plaster tone */
+  --scan:#3ff08a;        /* detection green: boxes and the primary action */
+  --mute-d:#b3aca1;      /* secondary text on charcoal */
+  --mute-p:#5b5247;      /* secondary text on paper */
+  --mute-c:#f6c9d1;      /* secondary text on crimson */
+  --f-display:"Unbounded","Arial Black","Helvetica Neue",sans-serif;
+  --f-text:"Onest","Helvetica Neue",Arial,sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --s-small:clamp(.8125rem,.79rem + .1vw,.875rem);
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
+  --s-lead:clamp(1.25rem,1.1rem + .7vw,1.625rem);
+  --s-head:clamp(2rem,1.3rem + 3.2vw,4rem);
+  --gut:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+a,button{touch-action:manipulation}
+.btn,.lang button,.copybtn{user-select:none;-webkit-user-select:none}
+body{background:var(--ink);color:var(--paper);font-family:var(--f-text);font-size:var(--s-body);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--scan);color:var(--ink)}
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="es"]{display:none!important}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--scan);outline-offset:3px}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;text-wrap:balance}
+.pad{padding-left:max(20px,3vw,var(--gut));padding-right:max(20px,3vw,var(--gut-r))}
+.tag{font-family:var(--f-text);font-weight:700;font-size:.8125rem;letter-spacing:.02em;font-variant-numeric:tabular-nums;background:var(--scan);color:var(--ink);padding:2px 7px;white-space:nowrap;line-height:1.4}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:var(--crimson);color:var(--paper);min-height:calc(100svh - 170px);overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;padding-block:18px 28px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;position:relative;z-index:5}
+.mark{font-family:var(--f-display);font-weight:800;font-size:1rem;letter-spacing:.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.mark small{font-family:var(--f-text);font-weight:500;font-size:var(--s-small);color:var(--mute-c);letter-spacing:0}
+.top-r{display:flex;align-items:center;gap:18px}
+.toplink{font-weight:500;font-size:var(--s-small);text-underline-offset:4px}
+.lang{display:flex;border:1.5px solid var(--paper);border-radius:999px;overflow:hidden}
+.lang button{all:unset;cursor:pointer;font-weight:700;font-size:.75rem;padding:6px 12px;transition:background-color .15s ease,color .15s ease}
+.lang button[aria-pressed="true"]{background:var(--paper);color:var(--crimson)}
+.lang button:focus-visible{outline:3px solid var(--scan)}
+
+.stage{position:relative;padding-top:clamp(28px,7vh,80px)}
+.statement{position:relative;z-index:3;font-size:clamp(64px,13.4vw,236px);line-height:.82;letter-spacing:-.035em}
+.statement span{display:block}
+.statement .l1{color:var(--paper)}
+.statement .l2{color:var(--black);display:flex;align-items:center;gap:.08em}
+.statement .l2 .arw{width:.66em;height:.5em;flex:none;margin-right:.06em}
+.reveal{display:block;animation:rise .9s var(--ease-out) both}
+.l2 .reveal{animation-delay:.08s}
+@keyframes rise{from{transform:translateY(.35em);clip-path:inset(0 0 100% 0)}to{transform:none;clip-path:inset(0 0 -10% 0)}}
+
+.fragment{position:absolute;z-index:2;margin:0;right:clamp(16px,5vw,90px);top:clamp(48px,9vh,110px);width:min(28vw,460px);aspect-ratio:750/938;rotate:4deg;animation:stick .9s .15s var(--ease-out) both}
+@keyframes stick{from{opacity:0;transform:translateY(40px) rotate(-3deg) scale(.96)}to{opacity:1;transform:none}}
+.fragment img{display:block;width:100%;height:100%;object-fit:cover}
+.fragment svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fragment svg line{stroke:#fff;stroke-opacity:.85;stroke-width:1.5;stroke-dasharray:5 6;vector-effect:non-scaling-stroke}
+.det{position:absolute;border:2.5px solid var(--scan);animation:det .5s var(--ease-out) both}
+.det .tag{position:absolute;left:-2.5px;bottom:calc(100% + 3px)}
+.det.r .tag{left:auto;right:-2.5px}
+.det.low .tag{bottom:auto;top:calc(100% + 3px)}
+.det.me{border-width:3.5px}
+.det:nth-of-type(1){animation-delay:.75s}.det:nth-of-type(2){animation-delay:.81s}.det:nth-of-type(3){animation-delay:.87s}.det:nth-of-type(4){animation-delay:.93s}
+@keyframes det{from{opacity:0;transform:scale(1.25)}to{opacity:1;transform:none}}
+.fragment figcaption{position:absolute;left:0;top:calc(100% + 8px);font-size:var(--s-small);color:var(--mute-c);rotate:-4deg;transform-origin:left;white-space:nowrap}
+
+.base{display:grid;gap:28px;position:relative;z-index:4;margin-top:clamp(24px,4vh,48px);max-width:min(62vw,780px)}
+.facts{display:flex;flex-wrap:wrap;gap:6px 22px;font-weight:500;font-size:var(--s-small);font-variant-numeric:tabular-nums}
+.facts b{font-weight:700}
+.pitch{display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px}
+.pitch p{font-size:var(--s-lead);line-height:1.3;max-width:34ch}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px;padding:0 22px 0 26px;background:var(--ink);color:var(--paper);font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:.95rem;letter-spacing:.01em;text-decoration:none;border-radius:999px;transition:transform .16s var(--ease-out),background-color .15s ease,color .15s ease}
+.btn svg{width:22px;height:22px;transition:transform .2s var(--ease-out)}
+.btn:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.btn:hover{background:var(--scan);color:var(--ink)}.btn:hover svg{transform:translate(2px,-2px)}}
+
+/* partner band, still in the first screen */
+.band{background:var(--ink);display:grid;grid-template-columns:auto 1fr;align-items:stretch;gap:clamp(24px,3vw,48px)}
+.slot{display:grid;align-content:center;gap:6px;padding-block:40px 30px;background:var(--ink);position:relative;z-index:2}
+.slot .frame{position:relative;outline:3px solid var(--scan);outline-offset:8px;padding:4px 2px}
+.slot .frame img{display:block;height:48px;width:auto}
+.slot .frame .tag{position:absolute;left:-11px;bottom:calc(100% + 11px)}
+.marquee{overflow:hidden;display:flex;align-items:center}
+.track{display:flex;align-items:center;gap:clamp(48px,6vw,96px);padding-left:clamp(48px,6vw,96px);flex:none;animation:slide 48s linear infinite}
+.track img{height:44px;width:auto;flex:none}
+.track img.tall{height:62px}
+.track img.wide{height:34px}
+@keyframes slide{to{transform:translateX(-100%)}}
+.band-note{background:var(--ink);color:var(--paper);font-size:var(--s-small);padding-block:12px 14px;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
+.band-note b{color:var(--paper);font-weight:500}
+
+@media (max-width:860px){
+  .hero{min-height:auto}
+  .hero{padding-block:14px 28px}
+  .stage{padding-top:36px}
+  .statement{font-size:17vw;letter-spacing:-.04em}
+  .fragment{position:relative;right:auto;top:auto;width:70vw;max-width:400px;margin:40px 3vw 0 auto;rotate:3deg}
+  .fragment figcaption{display:none}
+  .fragment .tag .pre{display:none}
+  .base{max-width:none;margin-top:30px;gap:22px}
+  .pitch{gap:18px}
+  .pitch p{font-size:1.2rem}
+  .btn{width:100%}
+  .facts{gap:4px 16px}
+  .band{grid-template-columns:1fr;gap:0}
+  .slot{padding-top:36px}
+  .toplink{display:none}
+  .marquee{padding-block:22px}
+  .track img{height:34px}.track img.tall{height:48px}.track img.wide{height:26px}
+  .track{gap:44px;padding-left:44px}
+}
+
+/* ---------- WHAT UTP GETS ---------- */
+.gets{background:var(--paper);color:var(--ink)}
+.gets-head{padding-block:clamp(72px,10vw,140px) clamp(36px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.gets-head h2{font-size:clamp(2.1rem,7.4vw,6rem);line-height:.9}
+.gets-head h2 em{font-style:normal;color:var(--crimson)}
+.gets-head p{color:var(--ink);font-size:var(--s-lead);line-height:1.35;max-width:34ch;justify-self:end}
+.panels{display:grid;grid-template-columns:repeat(12,1fr)}
+.panel{min-height:clamp(260px,34vw,440px);padding:clamp(22px,3vw,44px);display:grid;align-content:space-between;gap:28px;min-width:0}
+.panel h3{font-size:clamp(1.5rem,2.6vw,2.6rem);line-height:1.02;letter-spacing:-.025em}
+.panel p{font-size:var(--s-body);max-width:40ch;color:inherit}
+.panel .kick{font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,6vw,6rem);line-height:.8;letter-spacing:-.04em}
+.p1{grid-column:span 7;background:var(--crimson);color:var(--paper)}
+
+.p2{grid-column:span 5;background:var(--ink);color:var(--paper)}
+
+.p3{grid-column:span 5;background:var(--scan);color:var(--ink)}
+.p4{grid-column:span 7;background:var(--bone-2);color:var(--ink)}
+.logos-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.logos-row img{height:26px;width:auto}
+.evlink{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-weight:700;font-size:var(--s-body);color:var(--scan);text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:2px}
+.evlink svg{width:16px;height:16px;transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.evlink:hover svg{transform:translate(2px,-2px)}}
+.logos-row .utp-chip{padding:4px 2px;display:inline-flex}
+.logos-row .utp-chip img{height:24px}
+.logos-row .utp-chip{outline:3px solid var(--scan);outline-offset:3px;padding:6px 10px;font-family:var(--f-display);font-weight:800;font-size:.9rem;color:var(--paper)}
+@media (max-width:760px){.gets-head{grid-template-columns:1fr}.gets-head p{justify-self:start}.p1,.p2,.p3,.p4{grid-column:1/-1}.panel{min-height:0;gap:36px;padding-block:32px}}
+
+/* ---------- TEAM (title pinned left, portraits pass on the right) ---------- */
+.team{background:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);padding-block:clamp(80px,10vw,140px)}
+.team-pin{position:sticky;top:clamp(32px,8vh,96px);align-self:start;display:grid;gap:24px}
+.team-pin h2{font-size:clamp(3rem,7.6vw,8rem);line-height:.86}
+.team-pin h2 span{display:block}
+.team-pin p{font-size:var(--s-lead);line-height:1.35;max-width:30ch}
+.team-pin .tbd-note{font-size:var(--s-small);color:var(--mute-d)}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,72px) clamp(20px,3vw,40px)}
+.person{display:grid;gap:12px;align-content:start;min-width:0}
+.person:nth-child(even){margin-top:clamp(60px,12vw,180px)}
+.portrait{position:relative;aspect-ratio:4/5;background:var(--paper);overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait.photo img{filter:grayscale(1) contrast(1.08);mix-blend-mode:multiply;transition:filter .3s ease}
+@media (hover:hover) and (pointer:fine){.person:hover .portrait.photo img{filter:none;mix-blend-mode:normal}}
+.portrait.art img{filter:saturate(.85)}
+.portrait .det{animation:none}
+.person h3{font-size:clamp(1.25rem,1.6vw,1.6rem);letter-spacing:-.02em}
+.person .role{font-weight:700;color:var(--scan);font-size:var(--s-small)}
+.person p{font-size:var(--s-body);max-width:34ch}
+.chips{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{font-size:var(--s-small);font-weight:500;line-height:1.25;padding:5px 10px;border-radius:999px;background:#25211f;color:var(--paper)}
+.chips li:first-child{background:var(--scan);color:var(--ink);font-weight:700}
+.li{justify-self:start;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:var(--s-small);color:var(--paper);text-underline-offset:4px;padding-block:6px}
+.li svg{width:15px;height:15px;transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.li:hover svg{transform:translate(2px,-2px)}}
+@media (max-width:760px){
+  .team{grid-template-columns:1fr}
+  .team-pin{position:static}
+  .team-pin h2{font-size:17vw}
+  .people{grid-template-columns:1fr;gap:56px}
+  .person:nth-child(even){margin-top:0}
+  .portrait{max-width:none;aspect-ratio:4/4.4}
+  .person h3{font-size:1.6rem}
+}
+
+/* ---------- WORK (large plain list) ---------- */
+.work{background:var(--paper);color:var(--ink);padding-block:clamp(80px,11vw,150px)}
+.work h2{font-size:clamp(2.1rem,7.4vw,6rem);line-height:.9;margin-bottom:clamp(36px,5vw,64px)}
+.work h2 em{font-style:normal;color:var(--crimson)}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:8px 40px;align-items:baseline;padding-block:clamp(18px,2.2vw,30px);border-top:3px solid var(--ink)}
+.list li:last-child{border-bottom:3px solid var(--ink)}
+.list a{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.7rem,4vw,3.9rem);line-height:.95;letter-spacing:-.035em;text-decoration:none;display:inline-flex;align-items:center;gap:.35em;flex-wrap:wrap;transition:color .15s ease}
+.list a:focus-visible{outline-offset:4px}
+@media (hover:hover) and (pointer:fine){.list a:hover{color:var(--crimson)}.list a:hover .plogo{transform:scale(1.18) rotate(-4deg)}}
+.plogo{display:inline-block;height:.95em;width:auto;flex:none;transform-origin:left center;transition:transform .3s var(--ease-out)}
+.plogo.sq{height:1.35em;margin-block:-.2em}
+.list .ctx{display:block;font-size:var(--s-small);font-weight:700;color:var(--crimson);margin-bottom:6px}
+.list p{font-size:var(--s-body);max-width:46ch}
+@media (max-width:700px){.list li{grid-template-columns:1fr}}
+
+/* ---------- STATS (whole-team record) ---------- */
+.stats{background:var(--paper);color:var(--ink);padding-bottom:clamp(80px,10vw,140px)}
+.stats-h{font-size:clamp(2.1rem,7.4vw,6rem);line-height:.9;margin-bottom:clamp(28px,4vw,56px)}
+.tiles{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;align-items:start}
+.tile{display:grid;align-content:start;gap:20px;padding:clamp(20px,2.4vw,32px);min-width:0}
+.tile strong{font-family:var(--f-display);font-weight:800;font-size:clamp(3.4rem,6.4vw,7rem);line-height:.85;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.tile p{font-size:var(--s-lead);line-height:1.25;max-width:22ch}
+.tile small{display:block;margin-top:10px;font-size:var(--s-small);font-weight:700}
+.t1{grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:clamp(20px,3vw,48px)}
+.t1 .huge{font-size:clamp(9rem,19vw,19rem);line-height:.74;letter-spacing:-.06em}
+.t1{grid-column:1/7;background:var(--scan)}
+.t2{grid-column:7/10;margin-top:clamp(32px,5vw,72px);background:var(--ink);color:var(--paper)}
+.t3{grid-column:10/13;margin-top:clamp(64px,10vw,144px);background:var(--crimson);color:var(--paper)}
+.t2 strong,.t3 strong{font-size:clamp(2.8rem,4.4vw,4.8rem)}
+.t2 p,.t3 p{font-size:var(--s-body)}
+.tlogo{display:block;height:clamp(64px,6vw,92px);width:auto;margin-top:8px}
+.sub{font-size:clamp(1.25rem,1.8vw,1.75rem);letter-spacing:-.02em;padding-bottom:16px;border-bottom:3px solid var(--ink);margin:clamp(64px,8vw,112px) 0 8px}
+.emp{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(20px,3vw,40px)}
+.emp li{display:grid;gap:22px;align-content:start;padding-block:28px 24px;border-bottom:3px solid var(--ink)}
+.emp img{height:clamp(34px,3.4vw,50px);width:auto;max-width:100%;object-fit:contain;object-position:left center;filter:brightness(0);transition:filter .25s ease}
+@media (hover:hover) and (pointer:fine){.emp li:hover img{filter:none}}
+.emp div{display:grid;gap:4px}
+.emp em{font-style:normal;font-weight:700;color:var(--crimson)}
+.emp span{font-size:var(--s-body);line-height:1.35}
+.lead{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(32px,5vw,80px)}
+.lead li{display:grid;gap:4px;padding-block:18px;border-bottom:3px solid var(--ink)}
+.lead b{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.6rem,3vw,2.8rem);line-height:.95;letter-spacing:-.035em}
+.lead span{font-size:var(--s-body)}
+.lead em{font-style:normal;font-weight:700;color:var(--crimson)}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:clamp(56px,7vw,96px)}
+.figs div{display:grid;gap:6px;align-content:start}
+.figs strong{font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,4vw,3.8rem);line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.figs span{font-size:var(--s-body);max-width:24ch}
+@media (max-width:900px){.emp{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.emp{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .tiles{grid-template-columns:1fr;gap:8px}
+  .t1,.t2,.t3{grid-column:1/-1;margin-top:0}
+  .t1 .huge{font-size:34vw}
+  .lead{grid-template-columns:1fr}
+  .figs{grid-template-columns:1fr;gap:28px}
+}
+
+/* ---------- MANIFESTO ---------- */
+.manifesto{position:relative;background:var(--ink);overflow:hidden}
+.adam{position:relative;aspect-ratio:1600/726;min-height:420px;max-width:100%}
+.adam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.62);animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.07) translateX(-1.5%)}}
+.adam::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,16,16,.9) 0%,transparent 30%,transparent 55%,rgba(18,16,16,.95) 100%)}
+.gapbox{position:absolute;left:47.5%;top:28%;width:9%;height:26%;border:2.5px solid var(--scan);z-index:2}
+.gapbox .tag{position:absolute;left:-2.5px;bottom:calc(100% + 3px)}
+.manifesto .copy{position:absolute;left:0;right:0;bottom:7%;z-index:3}
+.manifesto h2{font-size:clamp(2rem,5.2vw,5.4rem);line-height:.92}
+.manifesto h2 em{font-style:normal;color:var(--scan)}
+.manifesto p{margin-top:18px;max-width:50ch;color:var(--paper);font-size:var(--s-lead);line-height:1.35}
+@media (max-width:700px){.adam{aspect-ratio:auto;min-height:620px}.adam img{object-position:50% 30%}.gapbox{left:38%;top:16%;width:24%;height:14%}}
+
+/* ---------- CTA (one word is the button) ---------- */
+.cta{display:block;position:relative;background:var(--crimson);color:var(--paper);text-decoration:none;min-height:62svh;overflow:hidden;transition:background-color .12s linear,color .12s linear}
+.cta:focus-visible{outline:4px solid var(--scan);outline-offset:-8px}
+.cta-top{display:flex;justify-content:space-between;gap:24px;padding-top:28px}
+.cta-top p{font-size:var(--s-lead);line-height:1.3;max-width:34ch}
+.cta-top svg{width:56px;height:56px;flex:none}
+.cta-word{position:absolute;left:0;right:0;bottom:22px;font-family:var(--f-display);font-weight:800;text-transform:uppercase;line-height:.8;letter-spacing:-.045em;white-space:nowrap}
+.cta-word span{display:inline-block;max-width:100%}
+.cta-word [lang="es"]{font-size:calc((100vw - 2*max(20px,3vw)) / 8.1)}
+.cta-word [lang="en"]{font-size:calc((100vw - 2*max(20px,3vw)) / 6.6)}
+.cta-word span{padding-right:.06em}
+.mail{display:inline-block;margin-top:10px;font-weight:700;border-bottom:2px solid currentColor;user-select:all}
+@media (hover:hover) and (pointer:fine){.cta:hover{background:var(--paper);color:var(--crimson)}}
+@media (max-width:640px){.cta{min-height:48svh}.cta-top svg{width:34px;height:34px}}
+
+/* ---------- FOOTER (photograph half, menu half) ---------- */
+.foot{display:grid;grid-template-columns:1fr 1fr;min-height:100svh;background:var(--ink)}
+.foot-img{position:relative;overflow:hidden;min-height:320px}
+.foot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.foot-img .det{left:38%;top:12%;width:20%;height:22%;animation:none}
+.foot-r{padding-block:48px 28px;display:grid;align-content:space-between;gap:48px;min-width:0}
+.menu{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.menu a{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.6rem,2.6vw,2.6rem);letter-spacing:-.025em;text-decoration:none;display:inline-block;transition:transform .2s var(--ease-out),color .15s ease}
+@media (hover:hover) and (pointer:fine){.menu:hover a{color:#5d5650}.menu a:hover{color:var(--paper);transform:translateX(12px)}}
+.count{display:flex;gap:clamp(16px,3vw,36px);flex-wrap:wrap}
+.count div{display:grid}
+.count strong{font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,3.6vw,3.6rem);line-height:1;color:var(--scan);font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.count span{font-size:var(--s-small);color:var(--mute-d)}
+.count-h{font-size:var(--s-small);color:var(--mute-d);margin-bottom:10px}
+.contact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px;font-size:var(--s-body)}
+.contact .fine{font-size:var(--s-small);color:var(--mute-d);max-width:26ch}
+.contact ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.contact a{text-underline-offset:4px}
+.contact h4{margin:0 0 8px;font-size:var(--s-small);color:var(--mute-d);font-weight:500}
+.copybtn{all:unset;cursor:pointer;border-bottom:1.5px solid var(--scan)}
+.legal{font-size:var(--s-small);color:var(--mute-d);line-height:1.5;max-width:60ch}
+@media (max-width:800px){.foot{grid-template-columns:1fr;min-height:auto}.foot-img{min-height:50svh}.menu a{font-size:8vw}.contact{grid-template-columns:1fr}}
+
+/* touch screens have no hover: items light up as they cross the middle of the screen */
+.touch .person .portrait .det{opacity:0;transform:scale(1.35);transition:opacity .35s ease,transform .55s var(--ease-out)}
+.touch .person.on .portrait .det{opacity:1;transform:none}
+.touch .person.on .portrait.photo img{filter:none;mix-blend-mode:normal}
+.touch .emp li.on img{filter:none}
+.portrait::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--scan);box-shadow:0 0 14px 2px rgba(63,240,138,.55);opacity:0;pointer-events:none}
+.touch .person.on .portrait::after{animation:sweep 1.1s var(--ease-out) both}
+@keyframes sweep{0%{top:0;opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}
+.person:active .portrait.photo img,.emp li:active img{filter:none;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){
+  .touch .person .portrait .det{transform:none}
+  .touch .person.on .portrait::after{animation:none}
+
+  .reveal,.fragment,.det,.adam img{animation:none}
+  .track{animation:none;flex-wrap:wrap;row-gap:20px}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<header class="hero pad" id="top">
+  <div class="top">
+    <a class="mark" href="#top">EAGLE <small>UTP · Lima</small></a>
+    <div class="top-r">
+      <a class="toplink" href="#apoyo"><span lang="es">Cómo apoyar</span><span lang="en">How to back us</span></a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="lang-es" aria-pressed="true">ES</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <h1 class="statement" aria-label="Eagle a Espoo">
+      <span class="l1"><span class="reveal">EAGLE</span></span>
+      <span class="l2"><span class="reveal" style="display:flex;align-items:center;gap:.08em"><svg class="arw" viewBox="0 0 100 76" aria-hidden="true"><path fill="currentColor" d="M0 27h52V0l48 38-48 38V49H0z"/></svg>ESPOO</span></span>
+    </h1>
+
+    <figure class="fragment">
+      <img src="img/hero-cut.webp" alt="Fragmento de La Escuela de Atenas de Rafael con cuatro figuras marcadas como miembros del equipo" width="750" height="938">
+      <svg viewBox="0 0 750 938" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="300" y1="62" x2="215" y2="62"/>
+        <line x1="370" y1="62" x2="575" y2="62"/>
+        <line x1="335" y1="100" x2="500" y2="450"/>
+      </svg>
+      <div class="det me" style="left:40%;top:2.7%;width:9.4%;height:8%"><span class="tag"><span class="pre">builder_01 · </span>Piero</span></div>
+      <div class="det r" style="left:18.6%;top:3.4%;width:10.2%;height:9%"><span class="tag"><span class="pre">builder_02 · </span>Valentina</span></div>
+      <div class="det r low" style="left:76.6%;top:2.7%;width:8.8%;height:8%"><span class="tag"><span class="pre">builder_04 · </span>Valentino</span></div>
+      <div class="det" style="left:61.8%;top:48%;width:9.6%;height:8.6%"><span class="tag"><span class="pre">builder_03 · </span>Johann</span></div>
+          </figure>
+  </div>
+
+  <div class="base">
+    <div class="pitch">
+      <p lang="es">Cuatro estudiantes de la UTP rumbo a Junction, el hackathon más grande de Europa. Tenemos el equipo y la experiencia; nos falta el viaje.</p>
+      <p lang="en">Four UTP students heading to Junction, Europe's biggest hackathon. We have the team and the track record; we're missing the trip.</p>
+      <a class="btn" href="#apoyo"><span lang="es">Respalda el viaje</span><span lang="en">Back the trip</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="facts">
+      <span><b>13–15.11.2026</b></span>
+      <span>Hype Areena, Espoo · Finland</span>
+      <span lang="es">11.813 km desde Lima</span><span lang="en">11,813 km from Lima</span>
+      <span lang="es">48 h · 2.000 builders · 100+ países</span><span lang="en">48 h · 2,000 builders · 100+ countries</span>
+    </div>
+  </div>
+</header>
+
+<section class="band pad" aria-label="Partners de Junction 2026">
+  <div class="slot">
+    <div class="frame"><span class="tag" lang="es">utp · ¿se suma?</span><span class="tag" lang="en">utp · joining?</span><img src="img/logos/utp-white.png" alt="Universidad Tecnológica del Perú" width="390" height="120"></div>
+  </div>
+  <div class="marquee">
+    <div class="track">
+      <img src="img/logos/google-deepmind.png" alt="Google DeepMind" class="wide"><img src="img/logos/nvidia.png" alt="NVIDIA"><img src="img/logos/openai.png" alt="OpenAI"><img src="img/logos/aws.png" alt="AWS" class="tall"><img src="img/logos/arduino.png" alt="Arduino" class="tall"><img src="img/logos/astrazeneca.png" alt="AstraZeneca"><img src="img/logos/modal.png" alt="Modal" class="wide"><img src="img/logos/mariadb.png" alt="MariaDB"><img src="img/logos/aalto-university.png" alt="Aalto University" class="tall"><img src="img/logos/espoo.png" alt="City of Espoo" class="tall"><img src="img/logos/hostinger.png" alt="Hostinger" class="wide"><img src="img/logos/exa.png" alt="Exa"><img src="img/logos/aiven.png" alt="Aiven"><img src="img/logos/cloudinary.png" alt="Cloudinary" class="wide"><img src="img/logos/s-pankki.png" alt="S-Pankki"><img src="img/logos/valio-aimo.png" alt="Valio Aimo"><img src="img/logos/oxylabs.png" alt="Oxylabs" class="wide"><img src="img/logos/mlh.png" alt="Major League Hacking" class="tall">
+    </div>
+    <div class="track" aria-hidden="true">
+      <img src="img/logos/google-deepmind.png" alt="" class="wide"><img src="img/logos/nvidia.png" alt=""><img src="img/logos/openai.png" alt=""><img src="img/logos/aws.png" alt="" class="tall"><img src="img/logos/arduino.png" alt="" class="tall"><img src="img/logos/astrazeneca.png" alt=""><img src="img/logos/modal.png" alt="" class="wide"><img src="img/logos/mariadb.png" alt=""><img src="img/logos/aalto-university.png" alt="" class="tall"><img src="img/logos/espoo.png" alt="" class="tall"><img src="img/logos/hostinger.png" alt="" class="wide"><img src="img/logos/exa.png" alt=""><img src="img/logos/aiven.png" alt=""><img src="img/logos/cloudinary.png" alt="" class="wide"><img src="img/logos/s-pankki.png" alt=""><img src="img/logos/valio-aimo.png" alt=""><img src="img/logos/oxylabs.png" alt="" class="wide"><img src="img/logos/mlh.png" alt="" class="tall">
+    </div>
+  </div>
+</section>
+
+<section class="gets" id="utp">
+  <div class="gets-head pad">
+    <h2><span lang="es">Lo que gana <em>la UTP</em></span><span lang="en">What <em>UTP</em> gets</span></h2>
+    <p lang="es">Un viaje financiado pone el nombre de la universidad en la misma sala que los laboratorios de IA más grandes del mundo.</p>
+    <p lang="en">One funded trip puts the university's name in the same room as the world's largest AI labs.</p>
+  </div>
+  <div class="panels">
+    <div class="panel p1">
+      <div class="logos-row" aria-label="Partners junto a UTP">
+        <img src="img/logos/google-deepmind.png" alt="Google DeepMind" style="height:20px"><img src="img/logos/nvidia.png" alt="NVIDIA"><img src="img/logos/openai.png" alt="OpenAI"><span class="utp-chip"><img src="img/logos/utp-white.png" alt="UTP"></span>
+      </div>
+      <div>
+        <h3 lang="es">La UTP en el escenario</h3><h3 lang="en">UTP on the stage</h3>
+        <p lang="es" style="margin-top:14px">Camisetas, acreditaciones, slides del pitch y repositorio del proyecto llevan la marca de la universidad.</p>
+        <p lang="en" style="margin-top:14px">Shirts, badges, pitch slides and the project repository carry the university's brand.</p>
+      </div>
+    </div>
+    <div class="panel p2">
+      <span class="kick">100+</span>
+      <div>
+        <h3 lang="es">Países que la ven competir</h3><h3 lang="en">Countries watching it compete</h3>
+        <p lang="es" style="margin-top:14px">2.000 builders, mentores e inversionistas durante 48 horas en Espoo.</p>
+        <p lang="en" style="margin-top:14px">2,000 builders, mentors and investors over 48 hours in Espoo.</p>
+        <a class="evlink" href="https://2026.hackjunction.com/" target="_blank" rel="noopener"><span lang="es">Conoce Junction</span><span lang="en">About Junction</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </div>
+    <div class="panel p3">
+      <span class="kick" lang="es">1 taller</span><span class="kick" lang="en">1 workshop</span>
+      <div>
+        <h3 lang="es">Vuelve al campus</h3><h3 lang="en">Back to campus</h3>
+        <p lang="es" style="margin-top:14px">Proponemos un taller abierto para estudiantes UTP al regresar, con el proyecto, el pitch y los errores incluidos.</p>
+        <p lang="en" style="margin-top:14px">We propose an open workshop for UTP students when we return, with the project, the pitch and the mistakes included.</p>
+      </div>
+    </div>
+    <div class="panel p4">
+      <span class="kick">48 h</span>
+      <div>
+        <h3 lang="es">Contenido para la UTP</h3><h3 lang="en">Content for UTP</h3>
+        <p lang="es" style="margin-top:14px">Cobertura antes, durante y después del evento, lista para publicar en los canales de la universidad.</p>
+        <p lang="en" style="margin-top:14px">Coverage before, during and after the event, ready to post on the university's channels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team pad" id="equipo" aria-labelledby="team-h">
+  <div class="team-pin">
+    <h2 id="team-h"><span lang="es">El</span><span lang="es">equipo</span><span lang="en">The</span><span lang="en">crew</span></h2>
+    <p lang="es">Cuatro estudiantes de la UTP, cuatro oficios: backend, datos, agilidad y producto. Los cuatro somos parte de LEAD UTP y sumamos tres becas de excelencia académica y un Top 2 nacional.</p>
+    <p lang="en">Four UTP students, four crafts: backend, data, agile and product. All four are in LEAD UTP, with three academic excellence scholarships and a national Top 2 between us.</p>
+  </div>
+  <div class="people">
+    <article class="person">
+      <div class="portrait photo"><img src="img/t-piero.webp" alt="Piero Pérez" width="640" height="800" loading="lazy"><div class="det" style="left:41%;top:10%;width:27%;height:22%"><span class="tag">builder_01 · Piero</span></div></div>
+      <span class="role">Backend · Multi-agent AI</span>
+      <h3>Piero Pérez</h3>
+      <p lang="es">Backends de optimización, contratos inteligentes y una plataforma que hoy usan 50 vendedores. Ingeniería de Software.</p>
+      <p lang="en">Optimisation backends, smart contracts and a platform 50 salespeople use today. Software Engineering.</p>
+      <ul class="chips"><li><span lang="es">Beca Excelencia Académica UTP</span><span lang="en">UTP Academic Excellence Scholarship</span></li><li><span lang="es">Top 5 de la promoción</span><span lang="en">Top 5 of cohort</span></li><li>Top 2 Stellar Odyssey</li><li>Santander X Explorer</li><li>LEAD UTP</li></ul>
+      <a class="li" href="https://www.linkedin.com/in/piero-perez-izquierdo/" target="_blank" rel="noopener">LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+    <article class="person">
+      <div class="portrait photo"><img src="img/t-valentina.webp" alt="Valentina Ayerve" width="640" height="800" loading="lazy"><div class="det" style="left:30%;top:12%;width:40%;height:34%"><span class="tag">builder_02 · Valentina</span></div></div>
+      <span class="role" lang="es">Agile · Data · IA</span><span class="role" lang="en">Agile · Data · AI</span>
+      <h3>Valentina Ayerve</h3>
+      <p lang="es">Scrum Master en el centro ágil de Interseguro. Ingeniería de Sistemas, backend con Oracle Next Education y ciencia de datos con Python.</p>
+      <p lang="en">Scrum Master at Interseguro's agile centre. Systems Engineering, backend via Oracle Next Education and data science with Python.</p>
+      <ul class="chips"><li><span lang="es">Beca Excelencia Académica UTP</span><span lang="en">UTP Academic Excellence Scholarship</span></li><li>Hult Prize UTP · Startups</li><li><span lang="es">Directora de Liderazgo, LEAD UTP</span><span lang="en">Leadership Director, LEAD UTP</span></li><li>Aspire Leaders · Harvard</li><li>GTOP UTP</li><li><span lang="es">Ponente IDIA</span><span lang="en">IDIA speaker</span></li></ul>
+      <a class="li" href="https://www.linkedin.com/in/valentina-ayerve-devcode" target="_blank" rel="noopener">LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+    <article class="person">
+      <div class="portrait photo"><img src="img/t-johann.webp" alt="Johann Diaz" width="640" height="800" loading="lazy"><div class="det" style="left:38%;top:14%;width:28%;height:24%"><span class="tag">builder_03 · Johann</span></div></div>
+      <span class="role">Data · Business Intelligence</span>
+      <h3>Johann Diaz</h3>
+      <p lang="es">Practicante de Business Specialist en el BCP. Convierte datos en decisiones con Python, SQL y Power BI. Ingeniería de Sistemas.</p>
+      <p lang="en">Business Specialist intern at BCP. Turns data into decisions with Python, SQL and Power BI. Systems Engineering.</p>
+      <ul class="chips"><li><span lang="es">Beca Excelencia Académica UTP</span><span lang="en">UTP Academic Excellence Scholarship</span></li><li><span lang="es">Décimo superior</span><span lang="en">Top 10% of class</span></li><li>Oracle Tech AI Builder</li><li>GTOP UTP</li><li>LEAD UTP</li><li><span lang="es">Ponente IDIA</span><span lang="en">IDIA speaker</span></li></ul>
+      <a class="li" href="https://www.linkedin.com/in/johann-diaz-96137a2a9" target="_blank" rel="noopener">LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+    <article class="person">
+      <div class="portrait photo"><img src="img/t-valentino.webp" alt="Valentino Llamocca" width="640" height="800" loading="lazy"><div class="det" style="left:37%;top:12%;width:24%;height:21%"><span class="tag">builder_04 · Valentino</span></div></div>
+      <span class="role" lang="es">Product · Estrategia</span><span class="role" lang="en">Product · Strategy</span>
+      <h3>Valentino Llamocca</h3>
+      <p lang="es">Cofundador y product lead de Masi y CEO de GrowthBro. Ingeniería Industrial, con experiencia en supply chain con SAP y Odoo.</p>
+      <p lang="en">Co-founder and product lead of Masi and CEO of GrowthBro. Industrial Engineering, with supply-chain experience in SAP and Odoo.</p>
+      <ul class="chips"><li>Top 2 Stellar Odyssey</li><li><span lang="es">Décimo superior · Impulsa UTP 2026</span><span lang="en">Top 10% · Impulsa UTP 2026</span></li><li>CEO GrowthBro</li><li>Hult Prize Perú</li><li>LEAD UTP</li><li>Claude Code 101</li></ul>
+      <a class="li" href="https://www.linkedin.com/in/valentino-llamocca-barraza-9a279a315" target="_blank" rel="noopener">LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<section class="work pad" id="logros" aria-labelledby="work-h">
+  <h2 id="work-h"><span lang="es">Ya <em>entregamos</em></span><span lang="en">Already <em>shipped</em></span></h2>
+  <ul class="list">
+    <li>
+      <a href="https://masiapp.vercel.app" target="_blank" rel="noopener">Masi<img class="plogo sq" src="img/masi-color.png" alt="" width="240" height="220" loading="lazy"></a>
+      <div><span class="ctx">Stellar Odyssey Perú 2026 · Top 2</span><p lang="es">Top 2, proyecto destacado. Marketplace de servicios del hogar: el pago queda retenido en un contrato Soroban hasta aprobar el trabajo. En producción.</p><p lang="en">Top 2, outstanding project. Home-services marketplace: payment is held in a Soroban contract until the work is approved. Live.</p></div>
+    </li>
+    <li>
+      <a href="https://github.com/ValentinoCafu/TwinSlot" target="_blank" rel="noopener">TwinSlot<img class="plogo" src="img/twinslot-color.png" alt="" width="628" height="220" loading="lazy"></a>
+      <div><span class="ctx">Impulsa × Inchcape · 08.2026</span><p lang="es">Líder de backend en un equipo de cuatro. Programación lineal entera y grafos sobre datos reales de un centro de distribución.</p><p lang="en">Backend lead in a team of four. Integer programming and graphs over real distribution-centre data.</p></div>
+    </li>
+    <li>
+      <a href="https://github.com/ValentinoCafu/ALEPH" target="_blank" rel="noopener"><span lang="es">Arbitraje IA</span><span lang="en">AI arbitration</span></a>
+      <div><span class="ctx">Aleph Hackathon · 03.2026</span><p lang="es">Varios validadores, cada uno con su propio LLM, llegan a un veredicto on-chain en GenLayer. Ninguna IA decide sola.</p><p lang="en">Several validators, each with its own LLM, reach an on-chain verdict on GenLayer. No single AI decides alone.</p></div>
+    </li>
+    <li>
+      <a href="https://github.com/piales00" target="_blank" rel="noopener"><span lang="es">DAP</span><span lang="en">DAP</span></a>
+      <div><span class="ctx">Diesel Autopartes del Perú · 2026</span><p lang="es">Cotizador sobre un catálogo de 13.568 piezas sincronizado con el ERP. Reemplazó las cotizaciones por WhatsApp.</p><p lang="en">Quoting tool over a 13,568-part catalogue synced with the ERP. It replaced quoting over WhatsApp.</p></div>
+    </li>
+    <li>
+      <a href="https://github.com/piales00/java-ide.nvim" target="_blank" rel="noopener">java-ide.nvim</a>
+      <div><span class="ctx">Open source · MIT</span><p lang="es">Plugin de Neovim para Java. El ciclo de ejecución bajó de unos 3 s a unos 50 ms.</p><p lang="en">Neovim plugin for Java. The run cycle dropped from about 3 s to about 50 ms.</p></div>
+    </li>
+  </ul>
+</section>
+
+<section class="stats pad" aria-labelledby="stats-h">
+  <h2 class="stats-h" id="stats-h"><span lang="es">En números</span><span lang="en">By the numbers</span></h2>
+  <div class="tiles">
+    <div class="tile t1">
+      <strong class="huge">3</strong>
+      <div><p lang="es">becas de excelencia académica UTP en un equipo de cuatro</p><p lang="en">UTP academic excellence scholarships in a team of four</p><small>Piero · Valentina · Johann</small></div>
+          </div>
+    <div class="tile t2">
+      <strong>Top 2</strong>
+      <p lang="es">en Stellar Odyssey Perú 2026 con Masi</p><p lang="en">at Stellar Odyssey Perú 2026 with Masi</p>
+      <img class="tlogo" src="img/masi-white.png" alt="Masi" width="240" height="220" loading="lazy">
+    </div>
+    <div class="tile t3">
+      <strong>4/4</strong>
+      <p lang="es">somos parte de LEAD UTP; Valentina dirige su pilar de Liderazgo</p><p lang="en">of us are in LEAD UTP; Valentina directs its Leadership pillar</p>
+      <small>Piero · Valentina · Johann · Valentino</small>
+    </div>
+  </div>
+
+  <h3 class="sub"><span lang="es">Hoy trabajamos en</span><span lang="en">Where we work today</span></h3>
+  <ul class="emp">
+    <li><img src="img/emp/bcp.png" alt="BCP" width="555" height="140" loading="lazy"><div><em>Johann</em><span lang="es">Practicante Business Specialist</span><span lang="en">Business Specialist intern</span></div></li>
+    <li><img src="img/emp/interseguro.png" alt="Interseguro" width="560" height="140" loading="lazy"><div><em>Valentina</em><span lang="es">Agile Trainee, Centro de Excelencia Ágil</span><span lang="en">Agile Trainee, Agile Centre of Excellence</span></div></li>
+    <li><img src="img/emp/tecsur.png" alt="Tecsur" width="560" height="140" loading="lazy"><div><em>Valentino</em><span lang="es">Asistente de mejora de procesos</span><span lang="en">Process Improvement Assistant</span></div></li>
+    <li><img src="img/emp/dap.png" alt="Diesel Autopartes del Perú" width="430" height="140" loading="lazy"><div><em>Piero</em><span lang="es">Backend freelance, plataforma DAP</span><span lang="en">Freelance backend, DAP platform</span></div></li>
+  </ul>
+
+  <h3 class="sub"><span lang="es">Lideramos y fundamos</span><span lang="en">Where we lead and build</span></h3>
+  <ul class="lead">
+    <li><b>LEAD UTP</b><span><em>Valentina</em> · <span lang="es">directora de Liderazgo</span><span lang="en">Leadership director</span> · <em>Piero</em>, <em>Johann</em>, <em>Valentino</em></span></li>
+    <li><b>Hult Prize</b><span><em>Valentina</em> · <span lang="es">coordinadora de startups, UTP</span><span lang="en">startups coordinator, UTP</span> · <em>Valentino</em> · Hult Prize Perú</span></li>
+    <li><b>GrowthBro</b><span><em>Valentino</em> · <span lang="es">cofundador y CEO</span><span lang="en">co-founder and CEO</span></span></li>
+    <li><b>Masi</b><span><em>Valentino</em>, <em>Piero</em> · <span lang="es">cofundadores</span><span lang="en">co-founders</span></span></li>
+  </ul>
+
+  <div class="figs">
+    <div><strong>3</strong><span lang="es">décimos superiores en el equipo</span><span lang="en">top-10% students on the team</span></div>
+    <div><strong>50</strong><span lang="es">vendedores usan a diario la plataforma DAP</span><span lang="en">salespeople use the DAP platform daily</span></div>
+    <div><strong>534</strong><span lang="es">tests en verde en Masi</span><span lang="en">passing tests in Masi</span></div>
+  </div>
+</section>
+
+<section class="manifesto" aria-labelledby="man-h">
+  <div class="adam">
+    <img src="img/adam.webp" alt="La creación de Adán de Miguel Ángel, con una caja de detección en el espacio entre las dos manos" width="1600" height="726" loading="lazy">
+    <div class="gapbox"><span class="tag">utp ↔ eagle</span></div>
+    <div class="copy pad">
+      <h2 id="man-h"><span lang="es">Nadie llega a Espoo <em>solo</em></span><span lang="en">Nobody reaches Espoo <em>alone</em></span></h2>
+      <p lang="es">El equipo pone las 48 horas. Para llegar a Espoo necesitamos que la universidad ponga la otra mano.</p>
+      <p lang="en">The team brings the 48 hours. To reach Espoo, we need the university to bring the other hand.</p>
+    </div>
+  </div>
+</section>
+
+<a class="cta pad" id="apoyo" href="mailto:pialeperez@gmail.com?subject=Apoyo%20equipo%20Eagle%20-%20Junction%202026">
+  <div class="cta-top">
+    <p><span lang="es">Escríbenos y te enviamos el plan y el presupuesto del viaje.</span><span lang="en">Write to us and we'll send the plan and the trip budget.</span><br><span class="mail">pialeperez@gmail.com</span></p>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+  </div>
+  <div class="cta-word pad"><span lang="es">Apóyanos</span><span lang="en">Back us</span></div>
+</a>
+
+<footer class="foot">
+  <div class="foot-img">
+    <img src="img/venus.webp" alt="El nacimiento de Venus de Botticelli, recortado" width="1600" height="1005" loading="lazy">
+    <div class="det"><span class="tag">espoo · 13.11</span></div>
+  </div>
+  <div class="foot-r pad">
+    <div>
+      <a class="mark" href="#top" style="margin-bottom:36px">EAGLE <small style="color:var(--mute-d)">UTP · Lima</small></a>
+      <ul class="menu">
+        <li><a href="#utp"><span lang="es">Para la UTP</span><span lang="en">For UTP</span></a></li>
+        <li><a href="#equipo"><span lang="es">Equipo</span><span lang="en">Team</span></a></li>
+        <li><a href="#logros"><span lang="es">Proyectos</span><span lang="en">Projects</span></a></li>
+        <li><a href="#apoyo"><span lang="es">Apoyar</span><span lang="en">Back us</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="count-h"><span lang="es">Faltan para abrir puertas en Espoo</span><span lang="en">Until doors open in Espoo</span></p>
+      <div class="count">
+        <div><strong id="cd-d">--</strong><span lang="es">días</span><span lang="en">days</span></div>
+        <div><strong id="cd-h">--</strong><span lang="es">horas</span><span lang="en">hours</span></div>
+        <div><strong id="cd-m">--</strong><span>min</span></div>
+        <div><strong id="cd-s">--</strong><span lang="es">seg</span><span lang="en">sec</span></div>
+      </div>
+    </div>
+    <div class="contact">
+      <div><h4 lang="es">Contacto</h4><h4 lang="en">Contact</h4>
+        <ul><li><button class="copybtn" type="button" id="copy-mail">pialeperez@gmail.com</button></li><li>Lima, Perú</li></ul></div>
+      <div><h4>Piero</h4>
+        <ul><li><a href="https://github.com/piales00" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.linkedin.com/in/piero-perez-izquierdo/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://dev.to/piales00" target="_blank" rel="noopener">dev.to</a></li></ul></div>
+      <div><h4 lang="es">El equipo en LinkedIn</h4><h4 lang="en">The team on LinkedIn</h4>
+        <ul><li><a href="https://www.linkedin.com/in/valentina-ayerve-devcode" target="_blank" rel="noopener">Valentina Ayerve</a></li><li><a href="https://www.linkedin.com/in/johann-diaz-96137a2a9" target="_blank" rel="noopener">Johann Diaz</a></li><li><a href="https://www.linkedin.com/in/valentino-llamocca-barraza-9a279a315" target="_blank" rel="noopener">Valentino Llamocca</a></li></ul></div>
+      <div><h4 lang="es">El evento</h4><h4 lang="en">The event</h4>
+        <ul><li><a href="https://2026.hackjunction.com/" target="_blank" rel="noopener">Junction 2026</a></li><li>13–15.11 · Espoo</li><li class="fine" lang="es">Los logos son de partners del evento, no del equipo.</li><li class="fine" lang="en">Logos belong to event partners, not team sponsors.</li></ul></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function setLang(l){
+    root.setAttribute('data-lang',l);root.lang=l;
+    document.getElementById('lang-es').setAttribute('aria-pressed',String(l==='es'));
+    document.getElementById('lang-en').setAttribute('aria-pressed',String(l==='en'));
+    try{localStorage.setItem('eagle-lang',l)}catch(e){}
+  }
+  var saved=null;try{saved=localStorage.getItem('eagle-lang')}catch(e){}
+  setLang(saved==='en'?'en':'es');
+  document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
+  document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
+
+  // Doors open 13 Nov 2026, 09:00 Helsinki (UTC+2)
+  var target=Date.UTC(2026,10,13,7,0,0);
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){
+    var s=Math.floor(Math.max(0,target-Date.now())/1000);
+    document.getElementById('cd-d').textContent=pad(Math.floor(s/86400));
+    document.getElementById('cd-h').textContent=pad(Math.floor(s%86400/3600));
+    document.getElementById('cd-m').textContent=pad(Math.floor(s%3600/60));
+    document.getElementById('cd-s').textContent=pad(s%60);
+  }
+  tick();setInterval(tick,1000);
+
+  // Touch: no hover, so colour follows the scroll position instead
+  if(matchMedia('(hover: none)').matches&&'IntersectionObserver' in window){
+    root.classList.add('touch');
+    var mid=new IntersectionObserver(function(es){
+      es.forEach(function(e){e.target.classList.toggle('on',e.isIntersecting)});
+    },{rootMargin:'-32% 0px -32% 0px'});
+    document.querySelectorAll('.person,.emp li').forEach(function(el){mid.observe(el)});
+  }
+
+  // Fit the CTA word to the band width in whichever language is showing
+  function fit(){
+    var box=document.querySelector('.cta-word');if(!box)return;
+    var cs=getComputedStyle(box),w=box.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    box.querySelectorAll('span').forEach(function(sp){
+      if(!sp.offsetWidth)return;
+      sp.style.fontSize='';
+      var cur=parseFloat(getComputedStyle(sp).fontSize),sw=sp.scrollWidth;
+      if(sw>0)sp.style.fontSize=Math.floor(cur*w/sw*.9)+'px';
+    });
+  }
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(document.querySelector('.cta'));
+  if(document.fonts){document.fonts.ready.then(fit);document.fonts.load('800 100px Unbounded').then(fit).catch(function(){});document.fonts.addEventListener&&document.fonts.addEventListener('loadingdone',fit)}
+  fit();
+  ['lang-es','lang-en'].forEach(function(id){document.getElementById(id).addEventListener('click',function(){requestAnimationFrame(fit)})});
+
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){
+    var groups=document.querySelectorAll('.panel,.person,.list li,.tile,.team-pin,.gets-head,.work h2,.emp li,.lead li,.figs div');
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return;io.unobserve(e.target);
+        var sibs=Array.prototype.indexOf.call(e.target.parentNode.children,e.target);
+        e.target.animate([{opacity:0,transform:'translateY(28px)'},{opacity:1,transform:'none'}],{duration:700,delay:Math.min(sibs,5)*70,easing:'cubic-bezier(.23,1,.32,1)',fill:'backwards'});
+      });
+    },{rootMargin:'0px 0px -8% 0px'});
+    groups.forEach(function(g){var r=g.getBoundingClientRect();if(r.top>innerHeight)io.observe(g)});
+  }
+
+  var btn=document.getElementById('copy-mail'),mail='pialeperez@gmail.com';
+  btn.addEventListener('click',function(){
+    function done(){btn.textContent=mail+(root.getAttribute('data-lang')==='en'?' · copied':' · copiado')}
+    function select(){var r=document.createRange();r.selectNodeContents(btn);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(mail).then(done,select)}else select();
+  });
+})();
+</script>
+</body>
+</html>
