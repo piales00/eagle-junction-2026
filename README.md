@@ -11,6 +11,8 @@
 
 <br>
 
+**[Ver la web →](https://eagle-junction-2026.vercel.app)**<br><br>
+
 [Junction 2026](https://2026.hackjunction.com/) · [Equipo](#el-equipo) · [Correr en local](#correr-en-local) · [Deploy](#deploy)
 
 </div>
