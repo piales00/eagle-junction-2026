@@ -84,7 +84,7 @@ También puedes importar el repo en [vercel.com/new](https://vercel.com/new) sin
 
 - **Obras de dominio público** (Wikimedia Commons): Rafael, *La Escuela de Atenas*; Miguel Ángel, *La creación de Adán*; Botticelli, *El nacimiento de Venus*.
 - **Inspiración visual:** [2026.hackjunction.com](https://2026.hackjunction.com/).
-- **Logos:** los de los partners vienen de la web de Junction 2026 y son de sus dueños. Patrocinan el evento, no a este equipo. Los logos de la UTP, BCP, Interseguro, Tecsur y Diesel Autopartes del Perú se usan solo como referencia.
+- **Logos:** los de los partners vienen de la web de Junction 2026 y son de sus dueños. Patrocinan el evento, no a este equipo. El logo y la trama del Programa Impulsa vienen del sitio de la Dirección de Empleabilidad UTP. Los logos de la UTP, BCP, Interseguro, Tecsur y Diesel Autopartes del Perú se usan solo como referencia.
 
 <div align="center">
 <br>

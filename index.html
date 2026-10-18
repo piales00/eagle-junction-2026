@@ -329,6 +329,19 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
   .track{animation:none;flex-wrap:wrap;row-gap:20px}
   html{scroll-behavior:auto}
 }
+
+/* ---------- FLAG: Programa Impulsa UTP, carried to Espoo ---------- */
+.flag{--impulsa:#941d81;position:relative;background:var(--impulsa);color:#fff;overflow:hidden;padding-block:clamp(72px,9vw,128px)}
+.flag-in{position:relative;z-index:2;display:grid;gap:clamp(28px,3.4vw,44px);max-width:min(64vw,860px)}
+.flag h2{font-size:clamp(2.6rem,8.4vw,7.4rem);line-height:.86}
+.flag-logo{position:relative;justify-self:start;border:2.5px solid var(--scan);padding:14px 18px;margin-top:26px}
+.flag-logo img{display:block;width:clamp(170px,19vw,260px);height:auto}
+.flag-logo .tag{position:absolute;left:-2.5px;bottom:calc(100% + 3px)}
+.flag p{font-size:var(--s-lead);line-height:1.35;max-width:36ch}
+.flag-trama{position:absolute;z-index:1;right:clamp(-40px,2vw,60px);top:50%;height:118%;width:auto;translate:0 -50%;pointer-events:none;clip-path:inset(0 0 0 0);transition:clip-path 1.4s var(--ease-out)}
+.flag.pre .flag-trama{clip-path:inset(0 100% 0 0)}
+@media (max-width:860px){.flag-in{max-width:none}.flag-trama{height:100%;right:-52%;opacity:.35}}
+@media (prefers-reduced-motion:reduce){.flag-trama{transition:none}.flag.pre .flag-trama{clip-path:none}}
 </style>
 </head>
 <body>
@@ -435,6 +448,16 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
         <p lang="en" style="margin-top:14px">Coverage before, during and after the event, ready to post on the university's channels.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="flag" id="impulsa" aria-labelledby="flag-h">
+  <img class="flag-trama" src="img/impulsa-trama.png" alt="" width="585" height="1095" loading="lazy">
+  <div class="flag-in pad">
+    <h2 id="flag-h"><span lang="es">Nuestra bandera</span><span lang="en">Our flag</span></h2>
+    <div class="flag-logo"><span class="tag">bandera · impulsa utp</span><img src="img/impulsa-white.png" alt="Programa Impulsa UTP" width="878" height="336" loading="lazy"></div>
+    <p lang="es">Venimos del Programa Impulsa, el acelerador de talento de la UTP. Ahí resolvimos retos reales con empresas; del reto con Inchcape salió TwinSlot. A Espoo la llevamos con nosotros.</p>
+    <p lang="en">We come from Programa Impulsa, UTP's talent accelerator. There we took on real challenges with companies; TwinSlot came out of the Inchcape challenge. We're carrying it to Espoo.</p>
   </div>
 </section>
 
@@ -622,6 +645,13 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
   setLang(saved==='en'?'en':'es');
   document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
   document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
+
+  // Impulsa flag: the arrow pattern sweeps in once, when the section arrives
+  var flag=document.querySelector('.flag');
+  if(flag&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    flag.classList.add('pre');
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){flag.classList.remove('pre');o.disconnect()}})},{threshold:.25}).observe(flag);
+  }
 
   // Doors open 13 Nov 2026, 09:00 Helsinki (UTC+2)
   var target=Date.UTC(2026,10,13,7,0,0);
