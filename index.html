@@ -330,18 +330,19 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
   html{scroll-behavior:auto}
 }
 
-/* ---------- FLAG: Programa Impulsa UTP, carried to Espoo ---------- */
-.flag{--impulsa:#941d81;position:relative;background:var(--impulsa);color:#fff;overflow:hidden;padding-block:clamp(72px,9vw,128px)}
-.flag-in{position:relative;z-index:2;display:grid;gap:clamp(28px,3.4vw,44px);max-width:min(64vw,860px)}
+/* ---------- FLAG: Conecta Impulso (Comunidad educativa Intercorp), carried to Espoo ---------- */
+.flag{--ci:#7a45ea;--ci-line:#b99cff;position:relative;background:var(--ci);color:#fff;overflow:hidden;padding-block:clamp(72px,9vw,128px)}
+.flag-in{position:relative;z-index:2;display:grid;gap:clamp(28px,3.4vw,44px);max-width:min(60vw,820px)}
 .flag h2{font-size:clamp(2.6rem,8.4vw,7.4rem);line-height:.86}
-.flag-logo{position:relative;justify-self:start;border:2.5px solid var(--scan);padding:14px 18px;margin-top:26px}
-.flag-logo img{display:block;width:clamp(170px,19vw,260px);height:auto}
+.flag-logo{position:relative;justify-self:start;border:2.5px solid var(--scan);padding:16px 20px;margin-top:26px}
+.flag-logo img{display:block;width:clamp(130px,13vw,180px);height:auto}
 .flag-logo .tag{position:absolute;left:-2.5px;bottom:calc(100% + 3px)}
 .flag p{font-size:var(--s-lead);line-height:1.35;max-width:36ch}
-.flag-trama{position:absolute;z-index:1;right:clamp(-40px,2vw,60px);top:50%;height:118%;width:auto;translate:0 -50%;pointer-events:none;clip-path:inset(0 0 0 0);transition:clip-path 1.4s var(--ease-out)}
-.flag.pre .flag-trama{clip-path:inset(0 100% 0 0)}
-@media (max-width:860px){.flag-in{max-width:none}.flag-trama{height:100%;right:-52%;opacity:.35}}
-@media (prefers-reduced-motion:reduce){.flag-trama{transition:none}.flag.pre .flag-trama{clip-path:none}}
+.flag-frame{position:absolute;z-index:1;right:clamp(24px,5vw,110px);top:50%;height:min(66%,500px);aspect-ratio:1;translate:0 -50%;pointer-events:none;overflow:visible}
+.flag-frame path{fill:none;stroke:var(--ci-line);stroke-width:14;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s var(--ease-out)}
+.flag.pre .flag-frame path{stroke-dashoffset:1}
+@media (max-width:1300px){.flag-frame{display:none}.flag-in{max-width:none}}
+@media (prefers-reduced-motion:reduce){.flag-frame path{transition:none}.flag.pre .flag-frame path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -451,13 +452,13 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
   </div>
 </section>
 
-<section class="flag" id="impulsa" aria-labelledby="flag-h">
-  <img class="flag-trama" src="img/impulsa-trama.png" alt="" width="585" height="1095" loading="lazy">
+<section class="flag" id="conecta-impulso" aria-labelledby="flag-h">
+  <svg class="flag-frame" viewBox="0 0 400 400" aria-hidden="true"><path pathLength="1" d="M20 250 V60 Q20 20 60 20 H380 V330 Q380 380 330 380 H60 Q20 380 20 350 V330"/></svg>
   <div class="flag-in pad">
     <h2 id="flag-h"><span lang="es">Nuestra bandera</span><span lang="en">Our flag</span></h2>
-    <div class="flag-logo"><span class="tag">bandera · impulsa utp</span><img src="img/impulsa-white.png" alt="Programa Impulsa UTP" width="878" height="336" loading="lazy"></div>
-    <p lang="es">Venimos del Programa Impulsa, el acelerador de talento de la UTP. Ahí resolvimos retos reales con empresas; del reto con Inchcape salió TwinSlot. A Espoo la llevamos con nosotros.</p>
-    <p lang="en">We come from Programa Impulsa, UTP's talent accelerator. There we took on real challenges with companies; TwinSlot came out of the Inchcape challenge. We're carrying it to Espoo.</p>
+    <div class="flag-logo"><span class="tag">bandera · conecta impulso</span><img src="img/conecta-impulso-white.png" alt="Conecta Impulso, Comunidad educativa Intercorp" width="431" height="465" loading="lazy"></div>
+    <p lang="es">Somos parte de Conecta Impulso, la red que potencia el talento con el respaldo del Grupo Intercorp, la comunidad educativa a la que pertenece la UTP. Su bandera viaja con nosotros a Espoo.</p>
+    <p lang="en">We're part of Conecta Impulso, the talent network backed by Grupo Intercorp, the educational community UTP belongs to. Its flag travels with us to Espoo.</p>
   </div>
 </section>
 
@@ -646,7 +647,7 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
   document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
   document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
 
-  // Impulsa flag: the arrow pattern sweeps in once, when the section arrives
+  // Conecta Impulso flag: its open frame draws itself once, when the section arrives
   var flag=document.querySelector('.flag');
   if(flag&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     flag.classList.add('pre');
