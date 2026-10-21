@@ -156,6 +156,7 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
 
 .p3{grid-column:span 5;background:var(--scan);color:var(--ink)}
 .p4{grid-column:span 7;background:var(--bone-2);color:var(--ink)}
+.p3,.p4{align-content:start;gap:clamp(18px,2vw,28px);min-height:0}
 .logos-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
 .logos-row img{height:26px;width:auto}
 .evlink{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-weight:700;font-size:var(--s-body);color:var(--scan);text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:2px}
@@ -164,7 +165,7 @@ h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:800;text-transform:up
 .logos-row .utp-chip{padding:4px 2px;display:inline-flex}
 .logos-row .utp-chip img{height:24px}
 .logos-row .utp-chip{outline:3px solid var(--scan);outline-offset:3px;padding:6px 10px;font-family:var(--f-display);font-weight:800;font-size:.9rem;color:var(--paper)}
-@media (max-width:760px){.gets-head{grid-template-columns:1fr}.gets-head p{justify-self:start}.p1,.p2,.p3,.p4{grid-column:1/-1}.panel{min-height:0;gap:36px;padding-block:32px}}
+@media (max-width:760px){.gets-head{grid-template-columns:1fr}.gets-head p{justify-self:start}.p1,.p2,.p3,.p4{grid-column:1/-1}.panel{min-height:0;gap:36px;padding-block:32px}.p3,.p4{gap:16px}}
 
 /* ---------- TEAM (title pinned left, portraits pass on the right) ---------- */
 .team{background:var(--ink);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);padding-block:clamp(80px,10vw,140px)}
