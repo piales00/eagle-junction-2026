@@ -1,13 +1,13 @@
 <div align="center">
 
-# EAGLE → ESPOO
+# EAGLE → FINLANDIA
 
 **Cuatro estudiantes de la UTP rumbo a Junction 2026, el hackathon más grande de Europa.**<br>
 <sub>Four UTP students heading to Junction 2026, Europe's biggest hackathon · 13–15.11.2026 · Hype Areena, Espoo, Finland</sub>
 
 <br>
 
-<img src="docs/preview-desktop.png" alt="Portada de la web: EAGLE → ESPOO sobre fondo carmesí, con un fragmento de La Escuela de Atenas marcado con cajas de detección" width="100%">
+<img src="docs/preview-desktop.png" alt="Portada de la web: EAGLE → FINLANDIA sobre fondo carmesí, con un fragmento de La Escuela de Atenas marcado con cajas de detección" width="100%">
 
 <br>
 
